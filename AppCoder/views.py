@@ -19,17 +19,17 @@ def curso(request):
 # Context from Code Snippet c:/ProyectoCoder/ProyectoCoder/urls.py:"""
 
 def inicio(request):
-    return HttpResponse("Hola, esta es la vista de inicio!")
+    return render(request, "AppCoder/inicio.html")
 
 def ver_cursos(request):
-    return HttpResponse("Hola, esta es la vista de cursos!")
+    return render(request, "AppCoder/ver_cursos.html")
 
 def ver_profesores(request):
-    return HttpResponse("Hola, esta es la vista de profesores!")
+    return render(request, "AppCoder/ver_profesores.html")
 
 def ver_entregas(request):
-    return HttpResponse("Hola, esta es la vista de entregas!")
+    return render(request, "AppCoder/ver_entregas.html")
 
 def ver_estudiantes(request):
-    return HttpResponse("Hola, esta es la vista de estudiantes!")
+    return render(request, "AppCoder/ver_estudiantes.html")
 

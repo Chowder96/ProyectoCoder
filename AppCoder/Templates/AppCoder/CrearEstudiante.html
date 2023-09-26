@@ -1,0 +1,18 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+
+
+<form action="/AppCoder/crearEstudiante/" method="POST"> {% csrf_token %}
+
+
+<q style="font-size: medium;;"> Nombre: <input type="text" name="nombre"></q>
+<q style="font-size: medium;"> Apellido: <input type="text" name="apellido"></q>
+<q style="font-size: medium;"> Email: <input type="text" name="email"></q>
+<q style="font-size: medium;"> Edad: <input type="" name="edad"></q>
+
+
+<input style="font-size: medium;" type="submit" value="Guardar">
+
+</form>
+{% endblock %}

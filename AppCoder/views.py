@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from AppCoder.models import *
+from .forms import *
 
 # Create your views here.
 
@@ -42,7 +43,26 @@ def cursoFormulario(request):
 
 def crearProfesor(request):
     if request.method == "POST":
-        profesor = Profesor(nombre=request.POST["nombre"], apellido=request.POST["apellido"], email=request.POST["email"], profesion=request.POST["profesion"])
-        profesor.save()
-        return render(request, "AppCoder/inicio.html")
-    return render(request, "AppCoder/crearProfesor.html")
+        miFormulario = profesorFormulario(request.POST)
+        
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            profesor = Profesor(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], profesion=informacion["profesion"])
+            profesor.save()
+            return render(request, "AppCoder/inicio.html")
+    else: 
+        miFormulario = profesorFormulario()
+    return render(request, "AppCoder/crearProfesor.html", {"miFormulario": miFormulario})
+
+def crearEstudiante(request):
+    if request.method == "POST":
+         miFormulario = estudianteFormulario(request.POST)
+
+         if miFormulario.is_valid():
+             informacion = miFormulario.cleaned_data
+             estudiante = Estudiante(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], edad=informacion["edad"])
+             estudiante.save()
+             return render(request, "AppCoder/inicio.html")
+         else:
+             miFormulario = estudianteFormulario()
+    return render(request, "AppCoder/crearEstudiante.html", {"miFormulario": miFormulario})

@@ -39,3 +39,10 @@ def cursoFormulario(request):
         curso.save()
         return render(request, "AppCoder/inicio.html")
     return render(request, "AppCoder/cursoFormulario.html")
+
+def crearProfesor(request):
+    if request.method == "POST":
+        profesor = Profesor(nombre=request.POST["nombre"], apellido=request.POST["apellido"], email=request.POST["email"], profesion=request.POST["profesion"])
+        profesor.save()
+        return render(request, "AppCoder/inicio.html")
+    return render(request, "AppCoder/crearProfesor.html")

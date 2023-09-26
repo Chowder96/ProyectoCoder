@@ -9,4 +9,5 @@ urlpatterns = [
     path('cursos/', ver_cursos, name='VerCursos'),
     path('entregas/', ver_entregas, name='VerEntregas'),
     path('estudiantes/', ver_estudiantes, name='VerEstudiantes'),
+    path('cursoFormulario/', cursoFormulario, name='cursoFormulario'),
 ]

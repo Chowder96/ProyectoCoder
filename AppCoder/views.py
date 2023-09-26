@@ -65,4 +65,5 @@ def crearEstudiante(request):
              return render(request, "AppCoder/inicio.html")
          else:
              miFormulario = estudianteFormulario()
-    return render(request, "AppCoder/crearEstudiante.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/crearEstudiante.html")
+

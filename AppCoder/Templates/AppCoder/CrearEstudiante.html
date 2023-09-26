@@ -2,17 +2,23 @@
 
 {% block title %}
 
+Este es el bloque para crear un estudiante.
+
+{% endblock %}
+
+{% block form %}
 
 <form action="/AppCoder/crearEstudiante/" method="POST"> {% csrf_token %}
 
 
-<q style="font-size: medium;;"> Nombre: <input type="text" name="nombre"></q>
-<q style="font-size: medium;"> Apellido: <input type="text" name="apellido"></q>
-<q style="font-size: medium;"> Email: <input type="text" name="email"></q>
-<q style="font-size: medium;"> Edad: <input type="" name="edad"></q>
-
-
-<input style="font-size: medium;" type="submit" value="Guardar">
+    <p> Nombre: <input type="text" name="nombre"></p>
+    <p> Apellido: <input type="text" name="apellido"></p>
+    <p> Email: <input type="text" name="email"></p>
+    <p> Edad: <input type="" name="edad"></p>
+    
+    
+<input type="submit" value="Guardar">
 
 </form>
+
 {% endblock %}

@@ -1,15 +1,21 @@
 {% extends 'AppCoder/padre.html' %}
 
 {% block title %}
+En este bloque se pueden registrar cursos nuevos.
+{% endblock %}
+
+{% block form%}
+
 
 
 <form action="/AppCoder/cursoFormulario/" method="POST"> {% csrf_token %}
 
 
-<p> Nombre: <input type="text" name="nombre"></p>
-<p> Comisión: <input type="text" name="comision"></p>
-
-<input type="submit" value="Guardar">
-
+    <p> Nombre: <input type="text" name="nombre"></p>
+    <p> Comisión: <input type="text" name="comision"></p>
+    
+    <input type="submit" value="Guardar">
+    
 </form>
-{% endblock %}
+
+{%endblock%}

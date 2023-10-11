@@ -15,3 +15,8 @@ class estudianteFormulario(forms.Form):
 class cursoFormulario(forms.Form):
     nombre = forms.CharField(max_length=30)
     comision = forms.IntegerField()
+
+class entregableFormulario(forms.Form):
+    nombre = forms.CharField(max_length=30)
+    fecha_entrega = forms.DateField()
+    estado = forms.BooleanField()

@@ -36,7 +36,7 @@ def ver_estudiantes(request):
 
 def cursoFormulario(request):
     if request.method == "POST":
-        curso = Curso(nombre=request.POST["nombre"], comision=request.POST["comision"])
+        curso = Curso(nombre=request.POST["nombre"].capitalize(), comision=request.POST["comision"])
         curso.save()
         return render(request, "AppCoder/inicio.html")
     return render(request, "AppCoder/cursoFormulario.html")
@@ -47,7 +47,7 @@ def crearProfesor(request):
         
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            profesor_nuevo = Profesor(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], profesion=informacion["profesion"])
+            profesor_nuevo = Profesor(nombre=informacion["nombre"].capitalize(), apellido=informacion["apellido"].capitalize(), email=informacion["email"], profesion=informacion["profesion"].capitalize())
             profesor_nuevo.save()
             return render(request, "AppCoder/inicio.html")
     else: 
@@ -60,10 +60,23 @@ def crearEstudiante(request):
 
          if formulario_estudiante.is_valid():
              info_estudiante = formulario_estudiante.cleaned_data
-             estudiante_nuevo = Estudiante(nombre=info_estudiante["nombre"], apellido=info_estudiante["apellido"], email=info_estudiante["email"], edad=info_estudiante["edad"])
+             estudiante_nuevo = Estudiante(nombre=info_estudiante["nombre"].capitalize(), apellido=info_estudiante["apellido"].capitalize(), email=info_estudiante["email"], edad=info_estudiante["edad"])
              estudiante_nuevo.save()
              return render(request, "AppCoder/inicio.html")
     else:
              formulario_estudiante = estudianteFormulario()
     return render(request, "AppCoder/crearEstudiante.html", {"formulario_estudiante": formulario_estudiante})
+
+def crearEntregable(request):
+    if request.method == "POST":
+        formulario_entregable = entregableFormulario(request.POST)
+
+        if formulario_entregable.is_valid():
+            info_entregable = formulario_entregable.cleaned_data
+            entregable_nuevo = Entregable(nombre=info_entregable["nombre"].capitalize(), fecha_entrega=info_entregable["fecha_entrega"], estado=info_entregable["estado"])
+            entregable_nuevo.save()
+            return render(request, "AppCoder/inicio.html")
+    else:
+        formulario_entregable = entregableFormulario()
+    return render(request, "AppCoder/crearEntregable.html", {"formulario_entregable": formulario_entregable})
 

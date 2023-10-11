@@ -5,13 +5,22 @@ Resultado de la busqueda de profesores.
 {% endblock %}
 
 {% block form%}
-<ol>
-    {% for profesor in lista_profesores %}
-    <li> 
-        Nombre y Apellido : {{profesor.nombre}}
-        {{profesor.apellido}},
-        Profesión : {{profesor.profesion}}
-    </li>
-    {% endfor %}
-</ol>
+
+    {% if lista_profesores %}
+        <ol>
+            {% for profesor in lista_profesores %}
+            <li> 
+                Nombre y Apellido : {{profesor.nombre}}
+                {{profesor.apellido}},
+                Profesión : {{profesor.profesion}}
+            </li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <h3>
+
+                No hay resultados que coincidan con tu busqueda.
+
+            </h3>
+    {% endif %}
 {%endblock%}

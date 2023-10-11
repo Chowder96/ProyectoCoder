@@ -8,17 +8,14 @@ Este es el bloque para crear un estudiante.
 
 {% block form %}
 
-<form action="/AppCoder/crearEstudiante/" method="POST"> {% csrf_token %}
+<form action="" method="POST"> {% csrf_token %}
 
-
-    <p> Nombre: <input type="text" name="nombre"></p>
-    <p> Apellido: <input type="text" name="apellido"></p>
-    <p> Email: <input type="text" name="email"></p>
-    <p> Edad: <input type="" name="edad"></p>
+    <table>
+        {{ formulario_estudiante.as_table }}
+    </table>
     
-    
-<input type="submit" value="Guardar">
+    <input type="submit" value="Guardar">
 
-</form>
+    </form>
 
 {% endblock %}

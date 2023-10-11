@@ -47,8 +47,8 @@ def crearProfesor(request):
         
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            profesor = Profesor(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], profesion=informacion["profesion"])
-            profesor.save()
+            profesor_nuevo = Profesor(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], profesion=informacion["profesion"])
+            profesor_nuevo.save()
             return render(request, "AppCoder/inicio.html")
     else: 
         miFormulario = profesorFormulario()
@@ -56,14 +56,14 @@ def crearProfesor(request):
 
 def crearEstudiante(request):
     if request.method == "POST":
-         miFormulario = estudianteFormulario(request.POST)
+         formulario_estudiante = estudianteFormulario(request.POST)
 
-         if miFormulario.is_valid():
-             informacion = miFormulario.cleaned_data
-             estudiante = Estudiante(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"], edad=informacion["edad"])
-             estudiante.save()
+         if formulario_estudiante.is_valid():
+             info_estudiante = formulario_estudiante.cleaned_data
+             estudiante_nuevo = Estudiante(nombre=info_estudiante["nombre"], apellido=info_estudiante["apellido"], email=info_estudiante["email"], edad=info_estudiante["edad"])
+             estudiante_nuevo.save()
              return render(request, "AppCoder/inicio.html")
-         else:
-             miFormulario = estudianteFormulario()
-    return render(request, "AppCoder/crearEstudiante.html")
+    else:
+             formulario_estudiante = estudianteFormulario()
+    return render(request, "AppCoder/crearEstudiante.html", {"formulario_estudiante": formulario_estudiante})
 

@@ -1,0 +1,17 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+Resultado de la busqueda de profesores.
+{% endblock %}
+
+{% block form%}
+<ul>
+    {% for profesor in lista_profesores %}
+    <li> 
+        Nombre y Apellido : {{profesor.nombre}}
+        {{profesor.apellido}},
+        Profesión : {{profesor.profesion}}
+    </li>
+    {% endfor %}
+</ul>
+{%endblock%}

@@ -80,3 +80,25 @@ def crearEntregable(request):
         formulario_entregable = entregableFormulario()
     return render(request, "AppCoder/crearEntregable.html", {"formulario_entregable": formulario_entregable})
 
+def buscar_profesor(request):
+    return render(request, "AppCoder/buscar_profesor.html")
+
+def buscar(request):
+
+    respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return HttpResponse(respuesta)
+
+def resultado_profesores(request):
+        
+    if request.GET["apellido"]:
+        apellido = request.GET["apellido"]
+        lista_profesores = Profesor.objects.filter(apellido__icontains=apellido)
+
+        return render(request, "AppCoder/resultado_profesor.html", {'valor':apellido, "lista_profesores": lista_profesores})
+        
+    else:   
+
+        respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return render(request, "AppCoder/buscar_profesor.html", {"respuesta": respuesta})

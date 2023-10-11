@@ -5,7 +5,7 @@ Resultado de la busqueda de profesores.
 {% endblock %}
 
 {% block form%}
-<ul>
+<ol>
     {% for profesor in lista_profesores %}
     <li> 
         Nombre y Apellido : {{profesor.nombre}}
@@ -13,5 +13,5 @@ Resultado de la busqueda de profesores.
         Profesión : {{profesor.profesion}}
     </li>
     {% endfor %}
-</ul>
+</ol>
 {%endblock%}

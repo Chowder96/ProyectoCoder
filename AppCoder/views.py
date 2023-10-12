@@ -3,44 +3,26 @@ from django.http import HttpResponse
 from AppCoder.models import *
 from .forms import *
 
-# Create your views here.
-
-def profe_nuevo(request):
-    profeN = Profesor(nombre="Juan", apellido="Perez", email="q2Z0u@example.com", profesion="Ingeniero")
-    profeN.save()
-
-    return HttpResponse(f'Hemos guardado al profesor {profeN.nombre}')
-
-def curso(request):
-    curso_nuevo = Curso(nombre="Python", comision=47765)
-    curso_nuevo.save()
-
-    return HttpResponse(f'Hemos guardado el curso {curso_nuevo.nombre}, con el número de comisión: {curso_nuevo.comision}')
-
-# Context from Code Snippet c:/ProyectoCoder/ProyectoCoder/urls.py:"""
-
+# Inincio
 def inicio(request):
     return render(request, "AppCoder/inicio.html")
 
-def ver_cursos(request):
-    return render(request, "AppCoder/ver_cursos.html")
+# Funciones de CRUD del profesor
 
+# Crear el profesor
+#def profe_nuevo(request):
+#    profeN = Profesor(nombre="Juan", apellido="Perez", email="q2Z0u@example.com", profesion="Ingeniero")
+#    profeN.save()
+#    return HttpResponse(f'Hemos guardado al profesor {profeN.nombre}')
+
+# Ver los profesores
 def ver_profesores(request):
-    return render(request, "AppCoder/ver_profesores.html")
 
-def ver_entregas(request):
-    return render(request, "AppCoder/ver_entregas.html")
+    todosLosProfesores = Profesor.objects.all()
 
-def ver_estudiantes(request):
-    return render(request, "AppCoder/ver_estudiantes.html")
+    return render(request, "AppCoder/ver_profesores.html", {'todosLosProfesores': todosLosProfesores})
 
-def cursoFormulario(request):
-    if request.method == "POST":
-        curso = Curso(nombre=request.POST["nombre"].capitalize(), comision=request.POST["comision"])
-        curso.save()
-        return render(request, "AppCoder/inicio.html")
-    return render(request, "AppCoder/cursoFormulario.html")
-
+#Crear el profesor
 def crearProfesor(request):
     if request.method == "POST":
         miFormulario = profesorFormulario(request.POST)
@@ -54,32 +36,7 @@ def crearProfesor(request):
         miFormulario = profesorFormulario()
     return render(request, "AppCoder/crearProfesor.html", {"miFormulario": miFormulario})
 
-def crearEstudiante(request):
-    if request.method == "POST":
-         formulario_estudiante = estudianteFormulario(request.POST)
-
-         if formulario_estudiante.is_valid():
-             info_estudiante = formulario_estudiante.cleaned_data
-             estudiante_nuevo = Estudiante(nombre=info_estudiante["nombre"].capitalize(), apellido=info_estudiante["apellido"].capitalize(), email=info_estudiante["email"], edad=info_estudiante["edad"])
-             estudiante_nuevo.save()
-             return render(request, "AppCoder/inicio.html")
-    else:
-             formulario_estudiante = estudianteFormulario()
-    return render(request, "AppCoder/crearEstudiante.html", {"formulario_estudiante": formulario_estudiante})
-
-def crearEntregable(request):
-    if request.method == "POST":
-        formulario_entregable = entregableFormulario(request.POST)
-
-        if formulario_entregable.is_valid():
-            info_entregable = formulario_entregable.cleaned_data
-            entregable_nuevo = Entregable(nombre=info_entregable["nombre"].capitalize(), fecha_entrega=info_entregable["fecha_entrega"], estado=info_entregable["estado"])
-            entregable_nuevo.save()
-            return render(request, "AppCoder/inicio.html")
-    else:
-        formulario_entregable = entregableFormulario()
-    return render(request, "AppCoder/crearEntregable.html", {"formulario_entregable": formulario_entregable})
-
+# Buscar el profesor
 def buscar_profesor(request):
     return render(request, "AppCoder/buscar_profesor.html")
 
@@ -89,6 +46,7 @@ def buscar(request):
 
     return HttpResponse(respuesta)
 
+# Resultado de la busqueda
 def resultado_profesores(request):
         
     if request.GET["apellido"]:
@@ -102,3 +60,75 @@ def resultado_profesores(request):
         respuesta = f'Última busqueda: {request.GET["apellido"]}'
 
     return render(request, "AppCoder/buscar_profesor.html", {"respuesta": respuesta})
+
+# Funciones de CRUD del curso
+
+# Crear el curso
+def curso(request):
+    curso_nuevo = Curso(nombre="Python", comision=47765)
+    curso_nuevo.save()
+
+    return HttpResponse(f'Hemos guardado el curso {curso_nuevo.nombre}, con el número de comisión: {curso_nuevo.comision}')
+
+def cursoFormulario(request):
+    if request.method == "POST":
+        curso = Curso(nombre=request.POST["nombre"].capitalize(), comision=request.POST["comision"])
+        curso.save()
+        return render(request, "AppCoder/inicio.html")
+    return render(request, "AppCoder/cursoFormulario.html")
+
+# Ver los cursos
+def ver_cursos(request):
+
+    todosLosCursos = Curso.objects.all()
+
+    return render(request, "AppCoder/ver_cursos.html", {'todosLosCursos': todosLosCursos})
+
+
+# Funciones de CRUD del estudiante
+
+# Crear el estudiante
+def crearEstudiante(request):
+    if request.method == "POST":
+         formulario_estudiante = estudianteFormulario(request.POST)
+
+         if formulario_estudiante.is_valid():
+             info_estudiante = formulario_estudiante.cleaned_data
+             estudiante_nuevo = Estudiante(nombre=info_estudiante["nombre"].capitalize(), apellido=info_estudiante["apellido"].capitalize(), email=info_estudiante["email"], edad=info_estudiante["edad"])
+             estudiante_nuevo.save()
+             return render(request, "AppCoder/inicio.html")
+    else:
+             formulario_estudiante = estudianteFormulario()
+    return render(request, "AppCoder/crearEstudiante.html", {"formulario_estudiante": formulario_estudiante})
+
+# Ver los estudiantes
+def ver_estudiantes(request):
+
+    todosLosEstudiantes = Estudiante.objects.all()
+
+    return render(request, "AppCoder/ver_estudiantes.html", {'todosLosEstudiantes': todosLosEstudiantes})
+
+
+# Funciones de CRUD del entregable
+
+# Crear el entregable
+def crearEntregable(request):
+    if request.method == "POST":
+        formulario_entregable = entregableFormulario(request.POST)
+
+        if formulario_entregable.is_valid():
+            info_entregable = formulario_entregable.cleaned_data
+            entregable_nuevo = Entregable(nombre=info_entregable["nombre"].capitalize(), fecha_entrega=info_entregable["fecha_entrega"], estado=info_entregable["estado"])
+            entregable_nuevo.save()
+            return render(request, "AppCoder/inicio.html")
+    else:
+        formulario_entregable = entregableFormulario()
+    return render(request, "AppCoder/crearEntregable.html", {"formulario_entregable": formulario_entregable})
+
+# Ver los entregables
+def ver_entregas(request):
+
+    todosLosEntregables = Entregable.objects.all()
+
+    return render(request, "AppCoder/ver_entregas.html", {'todosLosEntregables': todosLosEntregables})
+

@@ -1,1 +1,20 @@
 {% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+Esta es la lista de todos los entregables registrados en el sistema:
+{% endblock %}
+
+{% block form%}
+
+        <ol>
+
+            {% for entregas in todosLosEntregables %}
+            <li> 
+                Nombre del Alumno : {{entregas.nombre}},
+                Fecha de la entrega : {{entregas.fecha_entrega}},
+                Estado de la entrega : {{entregas.estado}}.
+            </li>
+            {% endfor %}
+        </ol>
+
+{%endblock%}

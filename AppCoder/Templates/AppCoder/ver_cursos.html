@@ -1,1 +1,19 @@
 {% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+Esta es la lista de todos los cursos registrados en el sistema:
+{% endblock %}
+
+{% block form%}
+
+        <ol>
+
+            {% for curso in todosLosCursos %}
+            <li> 
+                Curso : {{curso.nombre}},
+                Comisión : {{curso.comision}}
+            </li>
+            {% endfor %}
+        </ol>
+
+{%endblock%}

@@ -214,14 +214,14 @@ def buscar(request):
 # Resultado de la busqueda
 def resultado_entregable(request):
         
-    if request.GET["apellido"]:
-        apellido = request.GET["apellido"]
-        lista_estudiantes = Entregable.objects.filter(apellido__icontains=apellido)
+    if request.GET["nombre"]:
+        nombre = request.GET["nombre"]
+        lista_estudiantes = Entregable.objects.filter(nombre__icontains=nombre)
 
-        return render(request, "AppCoder/resultado_entregable.html", {'valor':apellido, "lista_estudiantes": lista_estudiantes})
+        return render(request, "AppCoder/resultado_entregable.html", {'valor':nombre, "lista_estudiantes": lista_estudiantes})
         
     else:   
 
-        respuesta = f'Última busqueda: {request.GET["apellido"]}'
+        respuesta = f'Última busqueda: {request.GET["nombre"]}'
 
     return render(request, "AppCoder/buscar_entregable.html", {"respuesta": respuesta})

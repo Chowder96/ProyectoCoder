@@ -96,6 +96,16 @@ def ver_cursos(request):
     return render(request, "AppCoder/ver_cursos.html", {'todosLosCursos': todosLosCursos})
 
 
+# Borar el curso
+
+def borrar_curso(request, nombre_curso):
+    borrar_a_curso = Curso.objects.get(nombre= nombre_curso)
+    borrar_a_curso.delete()
+    todos = Curso.objects.all()
+
+    return render(request, "AppCoder/ver_cursos.html", {'todosLosCursos': todos})
+
+
 # Funciones de CRUD del estudiante
 
 # Crear el estudiante
@@ -120,6 +130,41 @@ def ver_estudiantes(request):
     return render(request, "AppCoder/ver_estudiantes.html", {'todosLosEstudiantes': todosLosEstudiantes})
 
 
+def borrar_estudiante(request, nombre_estudiante):
+    borrar_a_estudiante = Estudiante.objects.get(nombre=nombre_estudiante)
+    borrar_a_estudiante.delete()
+
+    todos = Estudiante.objects.all()
+
+    return render(request, "AppCoder/ver_estudiantes.html", {'todosLosEstudiantes': todos})
+
+
+# Buscar el estudiante
+
+def buscar_estudiante(request):
+    return render(request, "AppCoder/buscar_estudiante.html")
+
+def buscar(request):
+
+    respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return HttpResponse(respuesta)
+
+# Resultado de la busqueda
+def resultado_estudiante(request):
+        
+    if request.GET["apellido"]:
+        apellido = request.GET["apellido"]
+        lista_estudiantes = Estudiante.objects.filter(apellido__icontains=apellido)
+
+        return render(request, "AppCoder/resultado_estudiante.html", {'valor':apellido, "lista_estudiantes": lista_estudiantes})
+        
+    else:   
+
+        respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return render(request, "AppCoder/buscar_estudiante.html", {"respuesta": respuesta})
+
 # Funciones de CRUD del entregable
 
 # Crear el entregable
@@ -143,3 +188,40 @@ def ver_entregas(request):
 
     return render(request, "AppCoder/ver_entregas.html", {'todosLosEntregables': todosLosEntregables})
 
+
+# Borrar entregables
+
+def borrar_entregable(request, nombre_entregable):
+    borrar_a_entregable = Entregable.objects.get(nombre=nombre_entregable)
+    borrar_a_entregable.delete()
+
+    todos = Entregable.objects.all()
+
+    return render(request, "AppCoder/ver_entregas.html", {'todosLosEntregables': todos})
+
+
+# Buscar los entregables
+
+def buscar_entregable(request):
+    return render(request, "AppCoder/buscar_entregable.html")
+
+def buscar(request):
+
+    respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return HttpResponse(respuesta)
+
+# Resultado de la busqueda
+def resultado_entregable(request):
+        
+    if request.GET["apellido"]:
+        apellido = request.GET["apellido"]
+        lista_estudiantes = Entregable.objects.filter(apellido__icontains=apellido)
+
+        return render(request, "AppCoder/resultado_entregable.html", {'valor':apellido, "lista_estudiantes": lista_estudiantes})
+        
+    else:   
+
+        respuesta = f'Última busqueda: {request.GET["apellido"]}'
+
+    return render(request, "AppCoder/buscar_entregable.html", {"respuesta": respuesta})

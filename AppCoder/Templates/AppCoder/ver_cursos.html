@@ -13,6 +13,7 @@ Esta es la lista de todos los cursos registrados en el sistema:
                 Curso : {{curso.nombre}},
                 Comisión : {{curso.comision}}
             </li>
+            <a class="btn btn-dark btn-l" href="{% url 'eliminarCurso' curso.nombre %}">Eliminar</a>
             {% endfor %}
         </ol>
 

@@ -14,6 +14,7 @@ Esta es la lista de todos los estudiantes registrados en el sistema:
                 {{estudiante.apellido}},
                 Edad : {{estudiante.edad}}
             </li>
+            <a class="btn btn-dark btn-l" href="{% url 'eliminarEstudiante' estudiante.nombre %}">Eliminar</a>
             {% endfor %}
         </ol>
 

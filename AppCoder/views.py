@@ -61,6 +61,17 @@ def resultado_profesores(request):
 
     return render(request, "AppCoder/buscar_profesor.html", {"respuesta": respuesta})
 
+
+# Borrar el profesor
+
+def borrar_profesor(request, nombre_profesor):
+
+    borrar_a_profesor = Profesor.objects.get(nombre= nombre_profesor)
+    borrar_a_profesor.delete()
+    todos = Profesor.objects.all()
+
+    return render(request, "AppCoder/ver_profesores.html", {'todosLosProfesores': todos})
+
 # Funciones de CRUD del curso
 
 # Crear el curso

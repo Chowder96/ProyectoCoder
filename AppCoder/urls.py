@@ -24,4 +24,7 @@ urlpatterns = [
 
     # Urls de resultados
     path('resultado_profesor/', resultado_profesores, name='resultado_profesor'),
+
+    # Urls para eliminar
+    path('eliminarProfesor/<nombre_profesor>', borrar_profesor, name='eliminarProfesor'),
 ]

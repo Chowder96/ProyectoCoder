@@ -1,0 +1,20 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+Esta es la lista de todos los estudiantes registrados en el sistema:
+{% endblock %}
+
+{% block form%}
+
+        <ol>
+
+            {% for e in object_list %}
+            <li> 
+                Nombre y Apellido : {{e.nombre}}
+                {{e.apellido}},
+                email : {{e.email}}
+            </li>
+            {% endfor %}
+        </ol>
+
+{%endblock%}

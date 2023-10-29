@@ -1,0 +1,21 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+En este bloque se podrá editar los datos de los profesores.
+{% endblock %}
+
+{% block form %}
+
+<form action="" method="POST"> {% csrf_token %}
+
+<table>
+
+    {{ miFormulario.as_table }}    
+</table>
+
+    <input type="submit" value="Actualizar">
+    
+    </form>
+
+
+{% endblock %}

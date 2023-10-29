@@ -34,4 +34,10 @@ urlpatterns = [
     path('borrarCurso/<nombre_curso>', borrar_curso, name='eliminarCurso'),
     path('borrarEstudiante/<nombre_estudiante>', borrar_estudiante, name='eliminarEstudiante'),
     path('borrarEntregable/<nombre_entregable>', borrar_entregable, name='eliminarEntregable'),
+
+    # Urls para actualizar
+    path('actualizarProfesor/<nombre_profesor>', actualizar_profesor, name='actualizarProfesor'),
+
+    # Urls de listas
+    path('estudiantes/listas/', EstudianteLista.as_view(), name='EstudianteLista'),
 ]

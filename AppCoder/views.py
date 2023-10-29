@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView
 from AppCoder.models import *
 from .forms import *
 
@@ -71,6 +72,31 @@ def borrar_profesor(request, nombre_profesor):
     todos = Profesor.objects.all()
 
     return render(request, "AppCoder/ver_profesores.html", {'todosLosProfesores': todos})
+
+
+def actualizar_profesor(request, nombre_profesor):
+
+    profesor_escogido = Profesor.objects.get(nombre= nombre_profesor)
+    
+    if request.method == "POST":
+        miFormulario = profesorFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+
+            profesor_escogido.nombre = informacion["nombre"]
+            profesor_escogido.apellido = informacion["apellido"]
+            profesor_escogido.email = informacion["email"]
+            profesor_escogido.profesion = informacion["profesion"]
+
+            profesor_escogido.save()
+
+        return render(request, "AppCoder/inicio.html")
+    else:
+        miFormulario = profesorFormulario(initial={"nombre":profesor_escogido.nombre, "apellido":profesor_escogido.apellido, "email":profesor_escogido.email, "profesion":profesor_escogido.profesion})
+
+        return render(request, "AppCoder/actualizar_profesor.html", {"miFormulario": miFormulario, "profesor":profesor_escogido})
+
 
 # Funciones de CRUD del curso
 
@@ -225,3 +251,9 @@ def resultado_entregable(request):
         respuesta = f'Última busqueda: {request.GET["nombre"]}'
 
     return render(request, "AppCoder/buscar_entregable.html", {"respuesta": respuesta})
+
+
+# Vistas basadas en clases
+
+class EstudianteLista(ListView):
+    model = Estudiante

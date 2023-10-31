@@ -3,7 +3,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from AppCoder.models import *
 from .forms import *
@@ -263,6 +263,9 @@ class EstudianteLista(ListView):
     model = Estudiante
 
 
+# Agregamos funciones de usuario
+
+# Inicio de sesión
 def login_view(request):
     if request.method == 'POST':
 
@@ -289,3 +292,32 @@ def login_view(request):
     form_inicio = AuthenticationForm()
 
     return render(request, "AppCoder/login.html", {'form': form_inicio})
+
+# Cerrar sesión
+
+def logout_view(request):
+
+    logout(request)
+
+    return render(request, "AppCoder/inicio.html")
+
+# Crear un usuario
+
+def create_user(request):
+
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data['username']
+
+            form.save()
+            return render(request, "AppCoder/inicio.html", {'mensaje': f'Usuario {username} Creado'})
+        
+    else:
+
+        form = UserCreationForm()
+
+    return render(request, "AppCoder/registro.html", {'form': form})

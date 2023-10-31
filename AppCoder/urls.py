@@ -42,5 +42,8 @@ urlpatterns = [
     path('estudiantes/listas/', EstudianteLista.as_view(), name='EstudianteLista'),
 
     # Urls de usuario
-    path('login/', login_view, name='inicio sesion'),
+    path('login/', login_view, name='login'),
+
+    # Url de registro
+    path('registro/', create_user, name='registro'),
 ]

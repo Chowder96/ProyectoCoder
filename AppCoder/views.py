@@ -5,7 +5,10 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
 from AppCoder.models import *
+from AppCoder.forms import UserCreationForm, UserEditForm
 from .forms import *
 
 # Inincio
@@ -21,6 +24,7 @@ def inicio(request):
 #    return HttpResponse(f'Hemos guardado al profesor {profeN.nombre}')
 
 # Ver los profesores
+@login_required
 def ver_profesores(request):
 
     todosLosProfesores = Profesor.objects.all()
@@ -119,6 +123,7 @@ def cursoFormulario(request):
     return render(request, "AppCoder/cursoFormulario.html")
 
 # Ver los cursos
+@login_required
 def ver_cursos(request):
 
     todosLosCursos = Curso.objects.all()
@@ -153,6 +158,7 @@ def crearEstudiante(request):
     return render(request, "AppCoder/crearEstudiante.html", {"formulario_estudiante": formulario_estudiante})
 
 # Ver los estudiantes
+@login_required
 def ver_estudiantes(request):
 
     todosLosEstudiantes = Estudiante.objects.all()
@@ -212,6 +218,7 @@ def crearEntregable(request):
     return render(request, "AppCoder/crearEntregable.html", {"formulario_entregable": formulario_entregable})
 
 # Ver los entregables
+@login_required
 def ver_entregas(request):
 
     todosLosEntregables = Entregable.objects.all()
@@ -297,9 +304,9 @@ def login_view(request):
 
 def logout_view(request):
 
-    logout(request)
+    LogoutView(request)
 
-    return render(request, "AppCoder/inicio.html")
+    return render(request, "AppCoder/inicio.html", {'mensaje': 'Sesión Cerrada!'})
 
 # Crear un usuario
 
@@ -321,3 +328,35 @@ def create_user(request):
         form = UserCreationForm()
 
     return render(request, "AppCoder/registro.html", {'form': form})
+
+# Edicion de perfil
+
+
+@login_required
+def editarPerfil(request):
+
+    usuario = request.user
+
+    if request.method == 'POST':
+
+        form = UserEditForm(request.POST)
+
+        if form.is_valid():
+
+            informacion = form.cleaned_data
+
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.last_name = informacion['last_name']
+            usuario.first_name = informacion['first_name']
+
+            usuario.save()
+
+            return render(request, "AppCoder/inicio.html")
+
+    else:
+
+        form = UserEditForm(initial={'email': usuario.email})
+
+    return render(request, "AppCoder/editarPerfil.html", {"form": form, "usuario": usuario})

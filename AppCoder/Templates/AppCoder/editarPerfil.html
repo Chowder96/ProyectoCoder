@@ -1,0 +1,27 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block title %}
+
+    <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
+    <h1>Formulario - Editar Perfil</h1>
+    <h1>De {{usuario}}</h1>
+    
+{% endblock %}
+    
+{% block form %}
+    
+    <form action="" method="POST"> {% csrf_token %}
+    
+         <table>
+    
+            {{ form.as_table }}    
+        </table>
+    
+         <input type="submit" value="Guardar">
+        
+    </form>
+    
+    
+{% endblock %}

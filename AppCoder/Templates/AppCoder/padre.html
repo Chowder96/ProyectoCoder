@@ -20,7 +20,7 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <a class="menu-toggle rounded" href="{% url 'Inicio' %}"><i class="fas fa-bars"></i></a>
+        <a style="font-size: 20px;"; class="menu-toggle rounded" href="{% url 'Inicio' %}">Inicio</a>
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#page-top">Start Bootstrap</a></li>
@@ -44,6 +44,8 @@
                 </em></h3>
                 <a class="btn btn-primary btn-xl" href="{% url 'login' %}">Iniciar sesión</a>
                 <a class="btn btn-primary btn-xl" href="{% url 'registro' %}">Registrarse</a>
+                <a class="btn btn-primary btn-xl" href="{% url 'editarPerfil' %}">Editar Perfil</a>
+                <a style='background-color: grey'; class="btn btn-secondary btn-xl" href="{% url 'logout' %}">Cerrar sesión</a>
             </div>
         </header>
         <!-- About-->

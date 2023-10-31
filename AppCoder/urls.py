@@ -40,4 +40,7 @@ urlpatterns = [
 
     # Urls de listas
     path('estudiantes/listas/', EstudianteLista.as_view(), name='EstudianteLista'),
+
+    # Urls de usuario
+    path('login/', login_view, name='inicio sesion'),
 ]

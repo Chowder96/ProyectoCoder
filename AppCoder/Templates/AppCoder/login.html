@@ -1,21 +1,20 @@
 {% extends 'AppCoder/padre.html' %}
 
 {% block title %}
-En este bloque se podrá registrar profesores nuevos.
+Iniciar sesión:
 {% endblock %}
 
 {% block form %}
 
 <form action="" method="POST"> {% csrf_token %}
 
-<table>
+    <table>
+        {{ form.as_table }}
+    </table>
 
-    {{ form.as_table }}    
-</table>
-
-    <input type="submit" value="Guardar">
+    <input type="submit" value="Iniciar sesión">
     
-    </form>
+</form>
 
 
 {% endblock %}

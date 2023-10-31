@@ -1,7 +1,10 @@
+# Imports
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from AppCoder.models import *
 from .forms import *
 
@@ -262,14 +265,27 @@ class EstudianteLista(ListView):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
+
+        form_inicio = AuthenticationForm(request, data = request.POST)
+
+        if form_inicio.is_valid():
+
+            info = form_inicio.cleaned_data
+            usuario = info.get('username')
+            contra = info.get('password')
+
+            user = authenticate(request, username = usuario, password = contra)
+
+            if user:
                 login(request, user)
-                return redirect('AppCoder:inicio')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'AppCoder/login.html', {'form': form})
+
+                print(user)
+
+                return render(request, "AppCoder/inicio.html", {'usuario': user})
+            
+            else:
+                return render(request, "AppCoder/inicio.html", {'mensaje': 'Datos Incorrectos!'})
+        
+    form_inicio = AuthenticationForm()
+
+    return render(request, "AppCoder/login.html", {'form': form_inicio})

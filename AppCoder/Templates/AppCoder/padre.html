@@ -44,8 +44,17 @@
                 </em></h3>
                 <a class="btn btn-primary btn-xl" href="{% url 'login' %}">Iniciar sesión</a>
                 <a class="btn btn-primary btn-xl" href="{% url 'registro' %}">Registrarse</a>
-                <a class="btn btn-primary btn-xl" href="{% url 'editarPerfil' %}">Editar Perfil</a>
-                <a style='background-color: grey'; class="btn btn-secondary btn-xl" href="{% url 'logout' %}">Cerrar sesión</a>
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary btn-xl" href="{% url 'editarPerfil' %}">Editar Perfil</a>
+                    <a style='background-color: grey'; class="btn btn-secondary btn-xl" href="{% url 'logout' %}">Cerrar sesión</a>
+                    {% if request.user.avatar_set.exists %}
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  src="{{ request.user.avatar_set.first.imagen.url }}" alt="Avatar de {{ request.user.username }}" class="rounded-circle" width="50"></a>
+                        {% comment %}<a class="btn btn-danger" href="{% url 'AgregarAvatar' %}">Cambiar Avatar</a> {% endcomment %}
+                    {% else %}
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'no-avatar.png' %}" alt="user" class="rounded-circle" width="31"></a>
+                        {% comment %}<a class="btn btn-danger" href="{% url 'AgregarAvatar' %}">Cambiar Avatar</a> {%endcomment %}
+                    {% endif %}
+                {% endif %}
             </div>
         </header>
         <!-- About-->
@@ -53,6 +62,7 @@
             <div class="container px-4 px-lg-5 text-center">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-10">
+                        {% if request.user.is_authenticated %}
                         <h2>En este apartado seras capaz de registrar cursos, profesores o estudiantes!</h2>
                         <p class="lead mb-5">
                             Puedes utilizar alguno de los cuatro botones a continuación o volver al inicio en este 
@@ -63,6 +73,15 @@
                         <a class="btn btn-dark btn-xl" href="{% url 'crearProfesor' %}">Registrar profesor.</a>
                         <a class="btn btn-dark btn-xl" href="{% url 'crearEstudiante' %}">Registrar estudiante.</a>
                         <a class="btn btn-dark btn-xl" href="{% url 'crearEntregable' %}">Registrar entrega.</a>
+                        {% else %}
+                        <p class="lead mb-5">
+                            <h1>Este apartado es para registrar cursos, profesores, entregables o estudiantes.</h1>
+                            Para poder registrar algunas de las opciones anteriores debes
+                            <a href="{% url 'registro' %}">Registrarte</a>
+                            , o si ya estas registrado debes
+                            <a href="{% url 'login' %}">Loguearte.</a>
+                        </p>
+                        {% endif %}
 
                     </div>
                 </div>
@@ -98,16 +117,27 @@
             <div class="container px-4 px-lg-5">
                 <ul class="list-inline mb-5">
                     <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-facebook"></i></a>
+                        <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/gabriel.galiano.14473/?viewas=100000686899395&show_switched_toast=0&show_invite_to_follow=0&show_switched_tooltip=0&show_podcast_settings=0&show_community_review_changes=0&show_community_rollback=0&show_follower_visibility_disclosure=0"><i class="icon-social-facebook"></i></a>
                     </li>
                     <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-twitter"></i></a>
+                        <a class="social-link rounded-circle text-white mr-3" href="https://www.instagram.com/gabrieljjgaliano/"><i class="icon-social-instagram"></i></a>
                     </li>
                     <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white" href="#!"><i class="icon-social-github"></i></a>
+                        <a class="social-link rounded-circle text-white mr-3" href="https://www.linkedin.com/in/gabriel-galiano-474b031b3/"><i class="icon-social-linkedin"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white mr-3" href="https://www.reddit.com/user/Shtroder"><i class="icon-social-reddit"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white" href="https://github.com/Chowder96/ProyectoCoder.git"><i class="icon-social-github"></i></a>
                     </li>
                 </ul>
+                <p class="lead mb-5">
+                    Si quieres saber acerca de mí, puedes hacerlo a traves de este 
+                    <a href="{% url 'Inicio' %}">botón!</a>
+                </p>
                 <p class="text-muted small mb-0">Copyright &copy; Your Website 2023</p>
+                </p>
             </div>
         </footer>
         <!-- Scroll to Top Button-->

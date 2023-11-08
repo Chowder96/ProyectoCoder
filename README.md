@@ -1,9 +1,7 @@
+# Entrega de proyecto final de Gabriel Galiano.
 ## Este es un proyecto para Coderhouse.
 
-# Entrega de proyecto final de Gabriel Galiano.
-
-
-## En esta pagina web hay 4 tipos de registro:
+# En esta pagina web hay 4 tipos de registro:
 
 - 1: Registro de comisión
 - 2: Registro de Profesor 

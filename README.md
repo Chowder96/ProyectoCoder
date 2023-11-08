@@ -1,4 +1,6 @@
-# Este es un proyecto para Coderhouse.
+## Este es un proyecto para Coderhouse.
+
+# Entrega de proyecto final de Gabriel Galiano.
 
 
 ## En esta pagina web hay 4 tipos de registro:
@@ -12,12 +14,23 @@ Dentro de los 'Entregables' Podemos encontarnos con que podemos ingresar nombre 
 
 En esta pagina web podemos ademas de registrar esos 4 objetos, tambien podremos visualizar o eliminar de la lista a estudiantes, profesores, entregables y comisiones.
 
-# Las funciones que aún no estan disponibles son: #
+# Aplicaciones instaladas:
 
-- 1: Función de Login o Signin
-- 2: Funcion de update de algunos de los 4 objetos antes mencionados.
-- 3: Un template con mi Bio.
-- 4: Mejora de datos del template 'Padre.html'
+-1: Tenemos la AppCoder instalada junto con las apps default de Django.
+
+# Objetivo:
+
+El objetivo de esta pagina web es la de poder loguearse, tener un perfil de uso basico para poder registrar, editar o eliminar alguno de los 4 registrables anteriormente mencionados, siempre y cuando se tenga el permiso pertinente. (el permiso es asignado por el administrador [superuser: 'chowdermachine'])
+
+# Modelos:
+
+Los modelos registrados son:
+
+-1: Estudiante.
+-2: Profesor.
+-3: Curso.
+-4: Entregable.
+-5: Avatar.
 
 # A tener en cuenta: #
 
@@ -26,5 +39,8 @@ para poder utilizar correctamente esta pagina, se debe tener instalado previamen
 - 1: Python 3.11.1 o superior.
 - 2: Django 4.2.5 o superior.
 
+Superuser: 'chowdermachine'
+password: '77912879Ga'
 
-Creado por Gabriel Galiano.
+
+## Creado por: Gabriel Galiano.

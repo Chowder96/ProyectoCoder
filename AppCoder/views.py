@@ -389,16 +389,16 @@ def editarPerfil(request):
 @login_required
 def agregarAvatar(request):
     if request.method == 'POST':
-        miFormulario = AvatarFormulario(request.POST, request.FILES)
-        if miFormulario.is_valid():
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
             usuario = request.user
-            imagen = miFormulario.cleaned_data['imagen']
+            imagen = form.cleaned_data['imagen']
             avatar = Avatar(user=usuario, imagen=imagen)
             avatar.save()
             # Redirigir a alguna página de éxito o realizar alguna otra acción
             return render(request, "AppCoder/inicio.html")  # Asegúrate de reemplazar 'nombre_de_la_vista_de_exito' con la vista que desees
 
     else:
-        miFormulario = AvatarFormulario()
+        form = AvatarFormulario()
     
-    return render(request, "AppCoder/agregarAvatar.html", {"miFormulario": miFormulario})
+    return render(request, "AppCoder/agregarAvatar.html", {"form": form})

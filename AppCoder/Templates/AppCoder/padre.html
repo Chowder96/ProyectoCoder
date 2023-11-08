@@ -49,10 +49,10 @@
                     <a style='background-color: grey'; class="btn btn-secondary btn-xl" href="{% url 'logout' %}">Cerrar sesión</a>
                     {% if request.user.avatar_set.exists %}
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  src="{{ request.user.avatar_set.first.imagen.url }}" alt="Avatar de {{ request.user.username }}" class="rounded-circle" width="50"></a>
-                        {% comment %}<a class="btn btn-danger" href="{% url 'AgregarAvatar' %}">Cambiar Avatar</a> {% endcomment %}
+                        <a class="btn btn-danger" href="{% url 'agregarAvatar' %}">Cambiar Avatar</a>
                     {% else %}
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'no-avatar.png' %}" alt="user" class="rounded-circle" width="31"></a>
-                        {% comment %}<a class="btn btn-danger" href="{% url 'AgregarAvatar' %}">Cambiar Avatar</a> {%endcomment %}
+                        <a class="btn btn-danger" href="{% url 'agregarAvatar' %}">Cambiar Avatar</a>
                     {% endif %}
                 {% endif %}
             </div>
